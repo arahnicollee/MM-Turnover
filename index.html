@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP MM SUPPORT - Turnover Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES - THEME SUPPORT & ACCESSIBLE HIGH-CONTRAST PALETTE
+       ========================================================================== */
+    :root {
+      /* Light Theme (Default) */
+      --bg-page: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-subtle: #f8fafc;
+      --bg-header: #ffffff;
+      --border-color: #cbd5e1;
+      --border-subtle: #e2e8f0;
+      
+      --text-primary: #0f172a;    /* High contrast near-black */
+      --text-secondary: #334155;  /* Slate 700 - clear readability */
+      --text-muted: #64748b;      /* Slate 500 */
+      --text-inverted: #ffffff;
+
+      --brand-primary: #0066cc;   /* SAP / Corporate Blue */
+      --brand-hover: #0052a3;
+      --brand-tint: #e0f2fe;
+      --brand-border: #90cdf4;
+
+      --accent-success: #15803d;  /* Deep emerald */
+      --success-tint: #dcfce7;
+      --success-border: #86efac;
+
+      --accent-warning: #b45309;  /* Deep amber */
+      --warning-tint: #fef3c7;
+      --warning-border: #fcd34d;
+
+      --accent-danger: #b91c1c;   /* Deep red */
+      --danger-tint: #fee2e2;
+      --danger-border: #fca5a5;
+
+      --accent-purple: #6d28d9;
+      --purple-tint: #ede9fe;
+      --purple-border: #c4b5fd;
+
+      --badge-tcode-bg: #e2e8f0;
+      --badge-tcode-text: #0f172a;
+      --badge-tcode-border: #94a3b8;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
+      --shadow-lg: 0 12px 30px rgba(15, 23, 42, 0.12);
+
+      --slide-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --bg-page: #090d16;
+      --bg-card: #131b2e;
+      --bg-card-subtle: #1a243b;
+      --bg-header: #0f172a;
+      --border-color: #2e3c59;
+      --border-subtle: #1e293b;
+
+      --text-primary: #f8fafc;    /* Crisp bright white */
+      --text-secondary: #cbd5e1;  /* Slate 300 - high readability */
+      --text-muted: #94a3b8;      /* Slate 400 */
+      --text-inverted: #0f172a;
+
+      --brand-primary: #38bdf8;   /* Sky 400 */
+      --brand-hover: #7dd3fc;
+      --brand-tint: rgba(56, 189, 248, 0.14);
+      --brand-border: #0284c7;
+
+      --accent-success: #4ade80;
+      --success-tint: rgba(74, 222, 128, 0.14);
+      --success-border: #166534;
+
+      --accent-warning: #fbbf24;
+      --warning-tint: rgba(251, 191, 36, 0.14);
+      --warning-border: #854d0e;
+
+      --accent-danger: #f87171;
+      --danger-tint: rgba(248, 113, 113, 0.14);
+      --danger-border: #991b1b;
+
+      --accent-purple: #a78bfa;
+      --purple-tint: rgba(167, 139, 250, 0.14);
+      --purple-border: #5b21b6;
+
+      --badge-tcode-bg: #1e293b;
+      --badge-tcode-text: #f1f5f9;
+      --badge-tcode-border: #475569;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Base Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* ==========================================================================
+       PROGRESS BAR
+       ========================================================================== */
+    .progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--border-subtle);
+      z-index: 1000;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0284c7, #38bdf8, #10b981);
+      width: 8.33%;
+      transition: width 0.3s ease;
+    }
+
+    /* ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== */
+    .top-navbar {
+      position: sticky;
+      top: 4px;
+      z-index: 900;
+      background-color: var(--bg-header);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      padding: 0.65rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+    .sap-badge {
+      background: linear-gradient(135deg, #005fb8, #0284c7);
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.3);
+    }
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Section Tabs */
+    .section-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bg-card-subtle);
+      padding: 0.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    .sec-tab {
+      background: transparent;
+      border: none;
+      padding: 0.35rem 0.75rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .sec-tab:hover {
+      color: var(--brand-primary);
+      background: var(--brand-tint);
+    }
+    .sec-tab.active {
+      background: var(--brand-primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+    }
+
+    /* Controls right */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .btn-icon:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-icon:active {
+      transform: translateY(0);
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+    }
+
+    /* ==========================================================================
+       MAIN SLIDE VIEWPORT
+       ========================================================================== */
+    .presentation-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1.5rem 5.5rem 1.5rem;
+      position: relative;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      animation: fadeInSlide var(--slide-transition);
+    }
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Slide Header Card */
+    .slide-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--brand-primary);
+    }
+    .header-info {
+      flex: 1;
+    }
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .badge-part {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      background: var(--brand-tint);
+      color: var(--brand-primary);
+      border: 1px solid var(--brand-border);
+    }
+    .badge-step {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: var(--bg-card-subtle);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+    .badge-system {
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: var(--purple-tint);
+      color: var(--accent-purple);
+      border: 1px solid var(--purple-border);
+    }
+    .slide-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 0.25rem;
+    }
+    .slide-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .header-tcodes {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    /* T-Code Pill */
+    .tcode {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background-color: var(--badge-tcode-bg);
+      color: var(--badge-tcode-text);
+      border: 1px solid var(--badge-tcode-border);
+      padding: 0.22rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      position: relative;
+      user-select: all;
+    }
+    .tcode:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .tcode::after {
+      content: "📋";
+      font-size: 0.65rem;
+      opacity: 0.6;
+    }
+
+    /* Slide Content Layout */
+    .slide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .slide-grid.single-col {
+      grid-template-columns: 1fr;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Steps list */
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--brand-tint);
+      color: var(--brand-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--brand-border);
+      margin-top: 2px;
+    }
+    .step-text strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .callout-body {
+      flex: 1;
+    }
+    .callout-body strong {
+      font-weight: 700;
+    }
+    .callout-note {
+      background: var(--brand-tint);
+      border: 1px solid var(--brand-border);
+      color: var(--text-primary);
+    }
+    .callout-warning {
+      background: var(--warning-tint);
+      border: 1px solid var(--warning-border);
+      color: var(--text-primary);
+    }
+    .callout-success {
+      background: var(--success-tint);
+      border: 1px solid var(--success-border);
+      color: var(--text-primary);
+    }
+
+    /* Gallery / Visual Display */
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .screenshot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .screenshot-card:hover {
+      border-color: var(--brand-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .screenshot-card:hover .zoom-overlay {
+      opacity: 1;
+    }
+    .screenshot-wrap {
+      position: relative;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 160px;
+      overflow: hidden;
+    }
+    .screenshot-wrap img {
+      width: 100%;
+      height: auto;
+      max-height: 380px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .screenshot-card:hover .screenshot-wrap img {
+      transform: scale(1.02);
+    }
+    .zoom-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      gap: 0.5rem;
+    }
+    .screenshot-caption {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-card-subtle);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .caption-tag {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    /* Multiple screenshots grid inside card */
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+    }
+
+    /* Carousel for multi-image slides */
+    .slider-gallery {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .slider-top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .slider-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-color);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .slider-dot.active {
+      background: var(--brand-primary);
+      width: 24px;
+      border-radius: 5px;
+    }
+
+    /* ==========================================================================
+       BOTTOM FLOATING NAVIGATION BAR
+       ========================================================================== */
+    .bottom-navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--bg-header);
+      border-top: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 950;
+      backdrop-filter: blur(8px);
+    }
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .slide-counter-pill {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.85rem;
+      border-radius: 8px;
+    }
+    .kb-hints {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .kb-key {
+      background: var(--badge-tcode-bg);
+      border: 1px solid var(--border-color);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: monospace;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .nav-buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.55rem 1.25rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-nav:hover:not(:disabled) {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-nav-primary {
+      background: linear-gradient(135deg, #0066cc, #0284c7);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.35);
+    }
+    .btn-nav-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0052a3, #0369a1);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
+    }
+
+    /* ==========================================================================
+       IMAGE LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 15, 26, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      animation: fadeInModal 0.2s ease;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .lightbox-header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+    .lightbox-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .lightbox-close {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+    .lightbox-body {
+      max-width: 1200px;
+      max-height: 82vh;
+      width: 100%;
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .lightbox-body img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ==========================================================================
+       TABLE OF CONTENTS DRAWER
+       ========================================================================== */
+    .toc-drawer {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 360px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -8px 0 25px rgba(0,0,0,0.25);
+      z-index: 1500;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .toc-drawer.open {
+      right: 0;
+    }
+    .toc-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .toc-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .toc-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.75rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .toc-item {
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .toc-item:hover {
+      background: var(--bg-card-subtle);
+      color: var(--brand-primary);
+      border-color: var(--border-color);
+    }
+    .toc-item.active {
+      background: var(--brand-tint);
+      color: var(--brand-primary);
+      border-color: var(--brand-border);
+      font-weight: 700;
+    }
+
+    /* Toast Notification for Copy */
+    .toast-copy {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 0.6rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 1200;
+      border: 1px solid #334155;
+    }
+    [data-theme="dark"] .toast-copy {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Matrix / Table Styles */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 0.75rem 0;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .data-table th {
+      background: var(--bg-card-subtle);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .data-table tr:hover {
+      background: var(--bg-card-subtle);
+    }
+
+    /* Printable Styles */
+    @media print {
+      .top-navbar, .bottom-navbar, .progress-bar-container, .btn-icon, .theme-toggle-btn {
+        display: none !important;
+      }
+      .presentation-viewport {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .slide {
+        display: block !important;
+        page-break-after: always;
+        margin-bottom: 2rem;
+      }
+      .screenshot-wrap img {
+        max-height: 250px !important;
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .slide-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-tabs {
+        display: none;
+      }
+      .slide-title {
+        font-size: 1.3rem;
+      }
+      .bottom-navbar {
+        padding: 0.65rem 1rem;
+      }
+      .kb-hints {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- TOP PROGRESS BAR -->
+  <div class="progress-bar-container">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="top-navbar">
+    <div class="brand-section" onclick="goToSlide(0)">
+      <span class="sap-badge">SAP MM</span>
+      <div>
+        <div class="brand-title">Support Turnover Presentation</div>
+        <div class="brand-subtitle">Knowledge Transfer & Standard Operating Procedures</div>
+      </div>
+    </div>
+
+    <!-- PART QUICK-JUMP TABS -->
+    <nav class="section-tabs">
+      <button class="sec-tab active" onclick="goToSlide(0)">Overview</button>
+      <button class="sec-tab" onclick="goToSlide(1)">Part 1: PR Approver</button>
+      <button class="sec-tab" onclick="goToSlide(7)">Part 1: Forwarding</button>
+      <button class="sec-tab" onclick="goToSlide(8)">Part 2: Claim Tag</button>
+      <button class="sec-tab" onclick="goToSlide(10)">Part 3: Recipient Auth</button>
+      <button class="sec-tab" onclick="goToSlide(11)">Quick Matrix</button>
+    </nav>
+
+    <!-- RIGHT CONTROLS -->
+    <div class="nav-controls">
+      <!-- Light / Dark Toggle -->
+      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark</span>
+      </button>
+
+      <!-- TOC Drawer Button -->
+      <button class="btn-icon" onclick="toggleTOC()" title="View Table of Contents (T)">
+        ☰
+      </button>
+
+      <!-- Fullscreen Button -->
+      <button class="btn-icon" onclick="toggleFullScreen()" title="Toggle Fullscreen (F)">
+        ⛶
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN SLIDES VIEWPORT -->
+  <main class="presentation-viewport">
+
+    <!-- =========================================================================
+         SLIDE 1: WELCOME & OVERVIEW / AGENDA
+         ========================================================================= -->
+    <section class="slide active" id="slide-0" data-part="Overview" data-title="Turnover Overview">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">TURNOVER DECK</span>
+            <span class="badge-step">SLIDE 1 OF 12</span>
+            <span class="badge-system">DEV 510 • DEV 100 • QAS 100 • PRD 100</span>
+          </div>
+          <h1 class="slide-title">SAP MM SUPPORT TURNOVER</h1>
+          <p class="slide-subtitle">Operational handover for Purchase Requisition Approver Configuration, Claim Tag Processing, and Master Data Maintenance.</p>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">📌 Turnover Objectives & Scope</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.55;">
+            This turnover guide documents the critical daily and ad-hoc support procedures handled by the SAP MM Support team. Use the <strong>Next [→]</strong> and <strong>Prev [←]</strong> buttons to walk through each configuration step and troubleshooting manual.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Part 1 Card -->
+            <div style="padding: 0.85rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;" onclick="goToSlide(1)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span class="badge-part">PART 1</span>
+                <span style="font-size: 0.78rem; color: var(--brand-primary); font-weight: 700;">Slides 2 - 8 →</span>
+              </div>
+              <strong style="color: var(--text-primary);">PR Approver Configuration & Transport Lifecycle</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                Resolving approver errors in ZR190, assigning position holders in PPOME (DEV 510), transporting to DEV 100 (SCC1), releasing TR (SE10), importing to QAS (STMS), testing (ME51N), Basis handover, and MR/PR Forwarding.
+              </p>
+            </div>
+
+            <!-- Part 2 Card -->
+            <div style="padding: 0.85rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;" onclick="goToSlide(8)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span class="badge-part">PART 2</span>
+                <span style="font-size: 0.78rem; color: var(--brand-primary); font-weight: 700;">Slides 9 - 10 →</span>
+              </div>
+              <strong style="color: var(--text-primary);">Claim Tag Notification & Resending</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                Handling missing claim notifications, checking Unix logs via SLG1 (ZUNNIXMAIL), and reprocessing claim tags using ZR65A & fallback ZR54.
+              </p>
+            </div>
+
+            <!-- Part 3 Card -->
+            <div style="padding: 0.85rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;" onclick="goToSlide(10)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span class="badge-part">PART 3</span>
+                <span style="font-size: 0.78rem; color: var(--brand-primary); font-weight: 700;">Slide 11 →</span>
+              </div>
+              <strong style="color: var(--text-primary);">Other Support Issues: Recipient Authorization</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                Resolving "You are not authorized to use Recipient" PR error by maintaining the employee master table via ZT01 / ZH01.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Key Metadata & Quick Start -->
+        <div class="content-card">
+          <h3 class="card-title">ℹ️ System Environment Landscape</h3>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Client / System</th>
+                <th>Role</th>
+                <th>Key Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color: var(--brand-primary);">DEV 510</strong></td>
+                <td>Golden Client</td>
+                <td>Customizing & Org assignment (<span class="tcode" onclick="copyTCode('PPOME')">PPOME</span>), SU01, TR Release (<span class="tcode" onclick="copyTCode('SE10')">SE10</span>)</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--brand-primary);">DEV 100</strong></td>
+                <td>Unit Testing Client</td>
+                <td>Client copy import (<span class="tcode" onclick="copyTCode('SCC1')">SCC1</span>) & initial verification</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--brand-primary);">QAS 100</strong></td>
+                <td>Quality Assurance</td>
+                <td>STMS import queue (<span class="tcode" onclick="copyTCode('STMS')">STMS</span>), PR testing (<span class="tcode" onclick="copyTCode('ME51N')">ME51N</span>), UAT</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--brand-primary);">PRD 100</strong></td>
+                <td>Production System</td>
+                <td>Transported by Basis (Ms. Ira), live ticket resolution</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-note">
+            <span class="callout-icon">💡</span>
+            <div class="callout-body">
+              <strong>Quick Tip:</strong> Click on any <span class="tcode">T-CODE</span> badge in this presentation to copy it directly to your clipboard! Click any screenshot to expand into full-screen zoom.
+            </div>
+          </div>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div class="callout-body">
+              <strong>Support Rule:</strong> Never transport unreleased or untested changes directly into PRD without documented UAT confirmation from the business requestor.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 2: PART 1 - PR APPROVER CONFIGURATION (BACKGROUND & ERROR ZR190)
+         ========================================================================= -->
+    <section class="slide" id="slide-1" data-part="Part 1" data-title="PR Approver: Background & Error">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 2 OF 12 • PROBLEM IDENTIFICATION</span>
+          </div>
+          <h1 class="slide-title">PR Approver Configuration: Background & Root Causes</h1>
+          <p class="slide-subtitle">Understanding why PR approver errors occur and identifying them using T-Code ZR190.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ZR190')">ZR190</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">🔍 Background & Why Errors Occur</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.55;">
+            The PR (Purchase Requisition) approver change process is initiated when an error occurs in the document due to an issue with the assigned approver. This typically happens for three primary reasons:
+          </p>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>No approver maintained in the system:</strong>
+                <div>No active user or approver has been assigned or maintained in the organizational structure for the specified release position.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Expired approver validity:</strong>
+                <div>The assigned approver's validity period has expired, or the employee has resigned/transferred, leaving the position unfulfilled.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Change in approval workflow:</strong>
+                <div>The original approver is no longer responsible due to organizational realignment or departmental changes. (Applicable when replacement is needed).</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-note">
+            <span class="callout-icon">📌</span>
+            <div class="callout-body">
+              <strong>Objective:</strong> The PR approver must be updated to ensure the document is routed to the designated approver so that the approval workflow can proceed seamlessly without blockage.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Screenshots of Sample Error in ZR190 -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image13.png', 'ZR190 - PR Approval Process Error Overview')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image13.png" alt="ZR190 Error Overview">
+              <div class="zoom-overlay">🔍 Click to Zoom Image</div>
+            </div>
+            <div class="screenshot-caption">
+              <span><strong>Sample Error in ZR190:</strong> PR Status shows "ERROR" for PR #10235058</span>
+              <span class="caption-tag">T-Code: ZR190</span>
+            </div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image27.png', 'ZR190 - Root Cause Analysis: Empty Approver under RY CFO')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image27.png" alt="ZR190 Root Cause Empty Approver">
+              <div class="zoom-overlay">🔍 Click to Zoom Image</div>
+            </div>
+            <div class="screenshot-caption">
+              <span><strong>Root Cause:</strong> No approver under position <em>RY: The Big Dipper CFO</em> (Agent field is blank)</span>
+              <span class="caption-tag">Release Code 05</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 3: PART 1 - STEP 1: CONFIGURATION IN DEV 510 (PPOME & SU01)
+         ========================================================================= -->
+    <section class="slide" id="slide-2" data-part="Part 1" data-title="Step 1: DEV 510 Maintenance">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 3 OF 12 • CONFIGURATION STEP 1</span>
+            <span class="badge-system">DEV 510 (Golden Client)</span>
+          </div>
+          <h1 class="slide-title">Approver Assignment in DEV 510</h1>
+          <p class="slide-subtitle">Maintaining Org Structure via PPOME and ensuring User Account exists via SU01.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('PPOME')">PPOME</span>
+          <span class="tcode" onclick="copyTCode('SU01')">SU01</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">⚙️ Step-by-Step Procedure</h3>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Pre-Requisite Check (SU01):</strong>
+                <div>Ensure the approver's SAP account exists in <strong>DEV 510</strong>. If not, create the user account in <span class="tcode" onclick="copyTCode('SU01')">SU01</span> before proceeding.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Open PPOME:</strong>
+                <div>Log in to <strong>DEV 510</strong> and execute transaction code <span class="tcode" onclick="copyTCode('PPOME')">PPOME</span>. Locate the target position (e.g., <em>RY: The Big Dipper CFO</em>).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Assign Position Holder:</strong>
+                <div>Click the <strong>Assign</strong> icon, then choose <strong>Holder</strong> → select <strong>User</strong>.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Search Approver Username:</strong>
+                <div>Enter the username of the designated approver (e.g., <code>Maricelbr</code>) in the search term field.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-text">
+                <strong>Confirm Selection & Save:</strong>
+                <div>Check the box for the approver record (e.g., <code>Rioflorido  Maricel Rioflorido</code>), click <strong>Execute (✓)</strong>, then click <strong>Save (💾)</strong>.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">6</span>
+              <div class="step-text">
+                <strong>Document Transport Request:</strong>
+                <div>In the Customizing Request prompt, enter the <strong>KP ticket number and short description</strong> of the changes, then Save.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div class="callout-body">
+              <strong>CRITICAL REMINDER:</strong> Do NOT forget to record and save your generated <strong>TR (Transport Request) number</strong> (e.g., <code>DEVK9A05F5</code>). You will need it in all succeeding steps!
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Screenshots of DEV 510 Steps -->
+        <div class="gallery-container">
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image8.png', 'PPOME - Task Assignment before Configuration')">
+              <div class="screenshot-wrap">
+                <img src="assets/images/image8.png" alt="PPOME Initial State">
+                <div class="zoom-overlay">🔍 Zoom</div>
+              </div>
+              <div class="screenshot-caption">
+                <span>Before Setup: Position without holder</span>
+                <span class="caption-tag">Step 2</span>
+              </div>
+            </div>
+
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image15.png', 'PPOME - Assign -> Holder -> User')">
+              <div class="screenshot-wrap">
+                <img src="assets/images/image15.png" alt="Assign Holder User">
+                <div class="zoom-overlay">🔍 Zoom</div>
+              </div>
+              <div class="screenshot-caption">
+                <span>Assign Relationship: Holder / User</span>
+                <span class="caption-tag">Step 3</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image33.png', 'Search Approver Username')">
+              <div class="screenshot-wrap">
+                <img src="assets/images/image33.png" alt="Search Term">
+                <div class="zoom-overlay">🔍 Zoom</div>
+              </div>
+              <div class="screenshot-caption">
+                <span>Search user: "Maricelbr"</span>
+                <span class="caption-tag">Step 4</span>
+              </div>
+            </div>
+
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image14.png', 'Check Box and Execute')">
+              <div class="screenshot-wrap">
+                <img src="assets/images/image14.png" alt="Check user and execute">
+                <div class="zoom-overlay">🔍 Zoom</div>
+              </div>
+              <div class="screenshot-caption">
+                <span>Check matching user & Execute</span>
+                <span class="caption-tag">Step 5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image22.png', 'Position Details Saved')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image22.png" alt="Position Details Saved">
+              <div class="zoom-overlay">🔍 Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span>Click Save icon (Floppy Disk) and record TR</span>
+              <span class="caption-tag">Step 6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 4: PART 1 - STEP 2: TRANSPORT TO DEV 100 VIA SCC1
+         ========================================================================= -->
+    <section class="slide" id="slide-3" data-part="Part 1" data-title="Step 2: Client Transport to DEV 100">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 4 OF 12 • CONFIGURATION STEP 2</span>
+            <span class="badge-system">DEV 100 (Testing Client)</span>
+          </div>
+          <h1 class="slide-title">Transport Configuration from DEV 510 to DEV 100</h1>
+          <p class="slide-subtitle">Copying customizing request locally using SCC1 and verifying in DEV 100.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('SCC1')">SCC1</span>
+          <span class="tcode" onclick="copyTCode('PPOME')">PPOME</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">🚚 Client Copy Procedure via SCC1</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.55;">
+            After completing the configuration in Golden Client (DEV 510), proceed to DEV 100 to replicate the changes for unit testing without releasing the TR yet.
+          </p>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Log in to DEV 100:</strong>
+                <div>Open SAP Logon and connect to client <strong>DEV 100</strong>. Execute transaction code <span class="tcode" onclick="copyTCode('SCC1')">SCC1</span>.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Enter Source Client:</strong>
+                <div>In the <em>Source Client</em> field, input <code>510</code> (Golden Client, where config was created).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Enter Transport Request:</strong>
+                <div>Input your TR number (e.g. <code>DEVK9A05F5</code>).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Enable Include Tasks:</strong>
+                <div>Check the box for <strong>☑ Include tasks in request</strong>. Leave Test Run unchecked.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-text">
+                <strong>Start Immediately:</strong>
+                <div>Click the <strong>Start Immediately</strong> button. Wait for execution details to confirm completion at the bottom.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-success">
+            <span class="callout-icon">✅</span>
+            <div class="callout-body">
+              <strong>Verify in DEV 100:</strong> Execute <span class="tcode" onclick="copyTCode('PPOME')">PPOME</span> in DEV 100 to ensure the approver assignment reflected. You can test it here first before releasing the TR in DEV 510.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: SCC1 Screenshot -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image4.png', 'SCC1 - Client Copy by Transport Request')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image4.png" alt="SCC1 Copy by Transport Request">
+              <div class="zoom-overlay">🔍 Click to Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span><strong>SCC1 Settings:</strong> Source: 510, TR: DEVK9A05F5, [✓] Include tasks</span>
+              <span class="caption-tag">T-Code: SCC1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 5: PART 1 - STEP 3: RELEASE TR IN DEV 510 VIA SE10
+         ========================================================================= -->
+    <section class="slide" id="slide-4" data-part="Part 1" data-title="Step 3: Release TR via SE10">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 5 OF 12 • CONFIGURATION STEP 3</span>
+            <span class="badge-system">DEV 510</span>
+          </div>
+          <h1 class="slide-title">Release the Transport Request (TR)</h1>
+          <p class="slide-subtitle">Using SE10 Transport Organizer with strict hierarchical release order.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('SE10')">SE10</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">📦 TR Release Rules & Procedure</h3>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Log in to DEV 510:</strong>
+                <div>Execute transaction code <span class="tcode" onclick="copyTCode('SE10')">SE10</span> to open the Transport Organizer.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Display Modifiable Requests:</strong>
+                <div>Check <em>Customizing Requests</em> & <em>Modifiable</em>, then click <strong>Display</strong>.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>CRITICAL RULE — Release Child Task First:</strong>
+                <div>Highlight the <strong>sub-task (second TR)</strong> first (e.g. <code>DEVK9A05F6</code> Customizing Task). Click <strong>Release Directly</strong> (the red truck icon 🚚).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Release Parent Request Second:</strong>
+                <div>After the child task completes release, highlight the <strong>main TR (first TR)</strong> (e.g. <code>DEVK9A05F5</code>) and click <strong>Release Directly</strong> (truck icon 🚚).</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div class="callout-body">
+              <strong>HIERARCHY RULE:</strong> You cannot release the parent TR while its sub-task is still open/modifiable! Always release the sub-task first. Once both are released, the TR is ready for QAS import.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Screenshots of SE10 -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image19.png', 'SE10 - Transport Organizer Display')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image19.png" alt="SE10 Display Screen">
+              <div class="zoom-overlay">🔍 Click to Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span>SE10 Transport Organizer - Click Display</span>
+              <span class="caption-tag">Step 2</span>
+            </div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image24.png', 'Release Second TR First, then Parent TR')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image24.png" alt="Release second TR then first TR">
+              <div class="zoom-overlay">🔍 Click to Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span><strong>Release Sequence:</strong> Sub-task (DEVK9A05F6) first, then Parent (DEVK9A05F5)</span>
+              <span class="caption-tag">Steps 3 & 4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 6: PART 1 - STEP 4: IMPORT TO QAS VIA STMS
+         ========================================================================= -->
+    <section class="slide" id="slide-5" data-part="Part 1" data-title="Step 4: Import to QAS via STMS">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 6 OF 12 • CONFIGURATION STEP 4</span>
+            <span class="badge-system">QAS</span>
+          </div>
+          <h1 class="slide-title">Transport to QAS via STMS</h1>
+          <p class="slide-subtitle">Importing the Transport Request into Quality Assurance System queue.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('STMS')">STMS</span>
+          <span class="tcode" onclick="copyTCode('PPOME')">PPOME</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">🚦 Complete STMS Import Workflow</h3>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Open STMS:</strong> Execute <span class="tcode" onclick="copyTCode('STMS')">STMS</span>. Click the <strong>Import Overview (🚚)</strong> icon.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Select QAS Queue:</strong> Double-click the <strong>QAS</strong> queue entry.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Refresh Queue:</strong> Click the <strong>Refresh (🔄)</strong> icon.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Adjust Queue:</strong> Click the <strong>Adjust Import Queue (⇄)</strong> icon.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-text">
+                <strong>Filter by TR:</strong> Click the <em>Request</em> header word, click the <strong>Filter (Funnel)</strong> icon, enter your TR number, and click check (✓).
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">6</span>
+              <div class="step-text">
+                <strong>Import Request:</strong> Select the TR line and click the <strong>Import Request (🚚 with green arrow)</strong> icon.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">7</span>
+              <div class="step-text">
+                <strong>Target Client 100:</strong> Input <code>100</code> as Target Client, select Immediate, and Execute.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">8</span>
+              <div class="step-text">
+                <strong>Verify Status:</strong> Wait 5–10 seconds, click Refresh. A <strong>green square/checkmark</strong> confirms success!
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-note">
+            <span class="callout-icon">💡</span>
+            <div class="callout-body">
+              <strong>Post-Import Check:</strong> Open <span class="tcode" onclick="copyTCode('PPOME')">PPOME</span> in QAS to verify that the approver is reflected in the position details.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Multi-Screenshot STMS Grid -->
+        <div class="gallery-container">
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image32.png', 'STMS - Click Import Overview')">
+              <div class="screenshot-wrap"><img src="assets/images/image32.png" alt="STMS Overview"></div>
+              <div class="screenshot-caption"><span>STMS: Click Import Overview</span><span class="caption-tag">1</span></div>
+            </div>
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image3.png', 'Double Click QAS')">
+              <div class="screenshot-wrap"><img src="assets/images/image3.png" alt="Double Click QAS"></div>
+              <div class="screenshot-caption"><span>Double Click QAS Queue</span><span class="caption-tag">2</span></div>
+            </div>
+          </div>
+
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image2.png', 'Step 1: Refresh List')">
+              <div class="screenshot-wrap"><img src="assets/images/image2.png" alt="Refresh List"></div>
+              <div class="screenshot-caption"><span>1st: Refresh Queue</span><span class="caption-tag">3</span></div>
+            </div>
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image20.png', 'Step 2: Adjust Import Queue')">
+              <div class="screenshot-wrap"><img src="assets/images/image20.png" alt="Adjust Import Queue"></div>
+              <div class="screenshot-caption"><span>2nd: Adjust Import Queue</span><span class="caption-tag">4</span></div>
+            </div>
+          </div>
+
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image6.png', 'Step 3: Filter TR Number')">
+              <div class="screenshot-wrap"><img src="assets/images/image6.png" alt="Filter TR Number"></div>
+              <div class="screenshot-caption"><span>3rd: Filter TR Number</span><span class="caption-tag">5</span></div>
+            </div>
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image23.png', 'Click Import Request Icon')">
+              <div class="screenshot-wrap"><img src="assets/images/image23.png" alt="Import Request Icon"></div>
+              <div class="screenshot-caption"><span>Click Import Request (🚚)</span><span class="caption-tag">6</span></div>
+            </div>
+          </div>
+
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image17.png', 'Target Client 100')">
+              <div class="screenshot-wrap"><img src="assets/images/image17.png" alt="Target Client 100"></div>
+              <div class="screenshot-caption"><span>Input Target Client: 100</span><span class="caption-tag">7</span></div>
+            </div>
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image7.png', 'Successfully Transported Status')">
+              <div class="screenshot-wrap"><img src="assets/images/image7.png" alt="Success Green Status"></div>
+              <div class="screenshot-caption"><span>Success: Green Status Icon (✓)</span><span class="caption-tag">8</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 7: PART 1 - STEP 5: TESTING, UAT & PRD BASIS HANDOVER
+         ========================================================================= -->
+    <section class="slide" id="slide-6" data-part="Part 1" data-title="Step 5: Testing, UAT & PRD Handover">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 7 OF 12 • TESTING & DEPLOYMENT</span>
+            <span class="badge-system">QAS → PRD</span>
+          </div>
+          <h1 class="slide-title">Testing, UAT & Production Handover</h1>
+          <p class="slide-subtitle">Creating test PR in ME51N, tracking in ZT65/ZR65n, and Basis transport request.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ME51N')">ME51N</span>
+          <span class="tcode" onclick="copyTCode('ZT65')">ZT65</span>
+          <span class="tcode" onclick="copyTCode('ZR65n')">ZR65n</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">🧪 Testing Procedure in QAS</h3>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Create Test PR (ME51N):</strong>
+                <div>Execute <span class="tcode" onclick="copyTCode('ME51N')">ME51N</span>. Use an existing PR from PRD as reference to duplicate headers, cost centers, and GL accounts.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Material Selection Tip:</strong>
+                <div>If original material is unavailable in QAS, create a new material or select an existing material under the same company code.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Verify Approval Status:</strong>
+                <div>Check approval routing via <span class="tcode" onclick="copyTCode('ZT65')">ZT65</span> or <span class="tcode" onclick="copyTCode('ZR65n')">ZR65n</span> to confirm the new approver received the document.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>User Acceptance Testing (UAT):</strong>
+                <div>Request the end user to perform UAT and secure written confirmation before touching PRD.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-note">
+            <span class="callout-icon">✉️</span>
+            <div class="callout-body">
+              <strong>PRD Deployment:</strong> Once UAT confirmation is received, email the Basis Team to import the TR into Production. Currently, <strong>Ms. Ira Clarise S. Ramos</strong> is the acting Basis contact.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Sample Basis Email Screenshot -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image28.png', 'Sample Email to Basis for PRD Transport')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image28.png" alt="Sample Basis Email">
+              <div class="zoom-overlay">🔍 Click to Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span><strong>Sample Basis Request:</strong> Send DEVK number, KP ticket #, and approver assignment to Ms. Ira</span>
+              <span class="caption-tag">Email Template</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 8: PART 1 - SPECIAL: MR/PR APPROVER FORWARDING PROGRAM
+         ========================================================================= -->
+    <section class="slide" id="slide-7" data-part="Part 1" data-title="Special: Approver Forwarding">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 1</span>
+            <span class="badge-step">SLIDE 8 OF 12 • TEMPORARY DELEGATION</span>
+          </div>
+          <h1 class="slide-title">MR/PR Approver Forwarding Program</h1>
+          <p class="slide-subtitle">Temporary reassignment of approval responsibilities when primary approver is away.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ZR65n')">ZR65n</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">🔄 Temporary Delegation Flow</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.55;">
+            A custom transaction is available for MR/PR Approver Forwarding. This allows temporary delegation without needing permanent organizational re-configuration.
+          </p>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Input Approver Usernames:</strong>
+                <div>Enter the <strong>Original Approver Name</strong> (e.g. <code>CONNIETB</code>) and the <strong>Forward to Approver</strong> (e.g. <code>MARICELBR</code>).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Execute Program:</strong>
+                <div>Run the program to list pending PR/MR approval work items for the original approver.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Select Document:</strong>
+                <div>Check the box for the specific PR number(s) to be forwarded (e.g. <code>PR 10235227</code>).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Forward Work Item:</strong>
+                <div>Click the <strong>Forward Work Item</strong> button. Workflow status will update to READY for substitute.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-text">
+                <strong>Verification:</strong>
+                <div>Check transaction code <span class="tcode" onclick="copyTCode('ZR65n')">ZR65n</span> to confirm successful forwarding.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Side: Forwarding Program Screenshots -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image9.png', 'MR/PR Forwarding Program - Input Users')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image9.png" alt="Forwarding selection screen">
+              <div class="zoom-overlay">🔍 Click to Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span>Original Approver Name & Forward to Approver fields</span>
+              <span class="caption-tag">Step 1</span>
+            </div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image1.png', 'Select PR and Click Forward Work Item')">
+            <div class="screenshot-wrap">
+              <img src="assets/images/image1.png" alt="Forward Work Item Button">
+              <div class="zoom-overlay">🔍 Click to Zoom</div>
+            </div>
+            <div class="screenshot-caption">
+              <span>Select PR checkbox → Click "Forward Work Item" button</span>
+              <span class="caption-tag">Steps 3 & 4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 9: PART 2 - CLAIM TAG: TICKET & SLG1 APPLICATION LOG
+         ========================================================================= -->
+    <section class="slide" id="slide-8" data-part="Part 2" data-title="Claim Tag: Ticket & SLG1 Logs">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 2</span>
+            <span class="badge-step">SLIDE 9 OF 12 • CLAIM TAG MONITORING</span>
+          </div>
+          <h1 class="slide-title">Claim Tag: Ticket Analysis & SLG1 Application Log</h1>
+          <p class="slide-subtitle">Investigating "Unable to receive claim notification" tickets via SLG1 Unix logs.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('SLG1')">SLG1</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">📨 Incident Analysis & SLG1 Log Investigation</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 0.75rem; line-height: 1.55;">
+            <strong>Sample Ticket:</strong> User reports <em>"Unable to receive claim notification due to incorrect email address maintained in SAP"</em> (e.g. ticket KP-57140).
+          </p>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">💡</span>
+            <div class="callout-body">
+              <strong>Mandatory First Action:</strong> Always ask the user for the <strong>Claim tag number</strong> or <strong>Document number</strong> if not specified in the ticket!
+            </div>
+          </div>
+
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0.75rem 0 0.5rem 0;">Checking Logs via SLG1:</h4>
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Object:</strong> Input <code>ZUNNIXMAIL</code>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Subobject:</strong> Select based on document type:
+                <div style="font-size: 0.85rem; margin-top: 0.25rem;">
+                  • <code>GIMOD</code>: Goods Issue Notification<br>
+                  • <code>GIREV</code>: GI Reversal Notification<br>
+                  • <code>GRMOD</code>: Goods Receipt Notification<br>
+                  • <code>GRREV</code>: GR Reversal Notification<br>
+                  • <code>MRMOD</code>: Material Requisition Notification<br>
+                  • <code>ZY28</code>: ZY28 Unix Sending Log
+                </div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>External ID Formatting Rules:</strong>
+                <div style="font-size: 0.85rem; margin-top: 0.25rem;">
+                  • For <strong>MRMOD</strong>: 4 leading zeroes + MR number + asterisk: <code>0000123456*</code><br>
+                  • For <strong>GRMOD, GIMOD, etc.</strong>: Document number + asterisk: <code>500123456*</code>
+                </div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Time Restriction:</strong> Enter the date and time when the claim tag was dispatched, then Execute.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Side: Screenshots of Ticket & SLG1 -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image18.png', 'Sample Ticket KP-57140 - Unable to Receive Claim Notification')">
+            <div class="screenshot-wrap"><img src="assets/images/image18.png" alt="Sample Ticket"></div>
+            <div class="screenshot-caption"><span>Sample Ticket: KP-57140 Notification Issue</span><span class="caption-tag">Incident</span></div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image26.png', 'SLG1 - Object ZUNNIXMAIL and Subobject list')">
+            <div class="screenshot-wrap"><img src="assets/images/image26.png" alt="SLG1 Subobjects"></div>
+            <div class="screenshot-caption"><span>SLG1: Object ZUNNIXMAIL & Subobject selection</span><span class="caption-tag">Log Check</span></div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image16.png', 'SLG1 - Time Restriction Configuration')">
+            <div class="screenshot-wrap"><img src="assets/images/image16.png" alt="Time Restriction"></div>
+            <div class="screenshot-caption"><span>Set Time Restriction range before execution</span><span class="caption-tag">Execute</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 10: PART 2 - RESENDING CLAIM TAG (ZR65A & ZR54 FALLBACK)
+         ========================================================================= -->
+    <section class="slide" id="slide-9" data-part="Part 2" data-title="Resending Claim Tag">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 2</span>
+            <span class="badge-step">SLIDE 10 OF 12 • REPROCESSING & FALLBACK</span>
+          </div>
+          <h1 class="slide-title">Resending the Claim Tag: ZR65A & ZR54</h1>
+          <p class="slide-subtitle">Reprocessing via Monitoring Report with fallback handling for unlisted documents.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ZR65A')">ZR65A</span>
+          <span class="tcode" onclick="copyTCode('ZR54')">ZR54</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">📤 Standard Procedure via ZR65A</h3>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Execute ZR65A:</strong>
+                <div>Open transaction code <span class="tcode" onclick="copyTCode('ZR65A')">ZR65A</span> (Claim Tag Monitoring Report).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Enter Document Number:</strong>
+                <div>Input the target document number in the Document Number parameter field.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Ensure Selections Checked:</strong>
+                <div>Ensure checkboxes for Ariba MR, SAP ECC MR, Ariba PO, and SAP ECC PO are enabled as needed. Click <strong>Execute (F8)</strong>.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Verify Recipient Details:</strong>
+                <div>Highlight the specific line item. Verify recipient name and email address to ensure proper delivery destination.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-text">
+                <strong>Click Reprocess:</strong>
+                <div>Click the <strong>Reprocess</strong> button on the toolbar to re-send the notification.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div class="callout-body">
+              <strong>FALLBACK PROCEDURE (ZR54):</strong> If the claim tag does not appear in <span class="tcode" onclick="copyTCode('ZR65A')">ZR65A</span>, open <span class="tcode" onclick="copyTCode('ZR54')">ZR54</span>. Enter Reference Number or Document Number + Employee ID. If found, resend from there.
+            </div>
+          </div>
+
+          <div class="callout callout-danger">
+            <span class="callout-icon">🛑</span>
+            <div class="callout-body">
+              <strong>EXPIRED CLAIM TAG:</strong> If the claim tag cannot be found in <em>either</em> ZR65A or ZR54, it means the claim tag has <strong>already expired</strong>. The user must submit a brand new request.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Screenshots of ZR65A -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image11.png', 'ZR65A - Selection Parameters Screen')">
+            <div class="screenshot-wrap"><img src="assets/images/image11.png" alt="ZR65A Selection"></div>
+            <div class="screenshot-caption"><span>ZR65A: Enter Document Number & Check Data Selections</span><span class="caption-tag">Parameters</span></div>
+          </div>
+
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image31.png', 'ZR65A - Highlight Line Item and Click Reprocess')">
+            <div class="screenshot-wrap"><img src="assets/images/image31.png" alt="ZR65A Line Item Reprocess"></div>
+            <div class="screenshot-caption"><span>Highlight Line Item → Verify Recipient Email → Click "Reprocess"</span><span class="caption-tag">Action</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 11: PART 3 - RECIPIENT AUTHORIZATION (ZT01 / ZH01 MAINTENANCE)
+         ========================================================================= -->
+    <section class="slide" id="slide-10" data-part="Part 3" data-title="Recipient Auth & ZT01">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 3</span>
+            <span class="badge-step">SLIDE 11 OF 12 • MASTER DATA MAINTENANCE</span>
+          </div>
+          <h1 class="slide-title">Recipient Authorization & ZT01 Maintenance</h1>
+          <p class="slide-subtitle">Resolving "You are not authorised to use Recipient" error via Employee Master Table.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ZT01')">ZT01</span>
+          <span class="tcode" onclick="copyTCode('ZH01')">ZH01</span>
+          <span class="tcode" onclick="copyTCode('ME51N')">ME51N</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">👤 Incident Resolution: Employee Master Table</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 0.75rem; line-height: 1.55;">
+            <strong>Error Encountered in ME51N:</strong> <em>"Item 010 You are not authorize to use Recipient [Employee ID]"</em> (e.g. <code>RQ090008</code>).
+          </p>
+
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0.75rem 0 0.5rem 0;">Resolution Steps via ZT01:</h4>
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Execute ZT01:</strong> Input the Goods recipient / Employee ID (e.g. <code>RQ090008</code>) and click Execute.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Click Add:</strong> On the table maintenance toolbar, click the <strong>Add</strong> button.
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Enter User Details:</strong> Populate the mandatory fields provided by the requestor:
+                <div style="font-size: 0.85rem; margin-top: 0.25rem;">
+                  • <strong>Plant:</strong> 1000<br>
+                  • <strong>Goods Recipient / ID:</strong> AB238092<br>
+                  • <strong>End Date:</strong> 12/31/9999<br>
+                  • <strong>Full Name:</strong> Last, First, Middle Name<br>
+                  • <strong>Cost Center & Email:</strong> e.g. 49010 - FIN-Treasury<br>
+                  • <strong>Status:</strong> 1 (Regular)
+                </div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Save & Inform User:</strong> Click <strong>Check</strong>, then <strong>Save</strong>. Instruct the end user to re-attempt PR creation in ME51N.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Side: Screenshots of ZT01 Flow -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/image29.png', 'Error in ME51N: You are not authorize to use Recipient')">
+            <div class="screenshot-wrap"><img src="assets/images/image29.png" alt="ME51N Recipient Error"></div>
+            <div class="screenshot-caption"><span>ME51N: "You are not authorize to use Recipient"</span><span class="caption-tag">Incident</span></div>
+          </div>
+
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image5.png', 'ZT01 Input Goods Recipient')">
+              <div class="screenshot-wrap"><img src="assets/images/image5.png" alt="ZT01 Input Goods Recipient"></div>
+              <div class="screenshot-caption"><span>Input Goods Recipient</span><span class="caption-tag">Step 1</span></div>
+            </div>
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image10.png', 'Click Add in ZT01')">
+              <div class="screenshot-wrap"><img src="assets/images/image10.png" alt="ZT01 Click Add"></div>
+              <div class="screenshot-caption"><span>Click Add Button</span><span class="caption-tag">Step 2</span></div>
+            </div>
+          </div>
+
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image25.png', 'Input Details Modal')">
+              <div class="screenshot-wrap"><img src="assets/images/image25.png" alt="ZT01 Input Details"></div>
+              <div class="screenshot-caption"><span>Populate Employee Form</span><span class="caption-tag">Step 3</span></div>
+            </div>
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image12.png', 'Sample Details from Ticket')">
+              <div class="screenshot-wrap"><img src="assets/images/image12.png" alt="Sample Ticket Details"></div>
+              <div class="screenshot-caption"><span>Sample Ticket User Details</span><span class="caption-tag">Reference</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 12: QUICK MATRIX, T-CODE DIRECTORY & TURNOVER CHECKLIST
+         ========================================================================= -->
+    <section class="slide" id="slide-11" data-part="Matrix" data-title="Cheat Sheet & Checklist">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">REFERENCE MATRIX</span>
+            <span class="badge-step">SLIDE 12 OF 12 • CHEAT SHEET</span>
+          </div>
+          <h1 class="slide-title">SAP MM Support Cheat Sheet & Operational Checklist</h1>
+          <p class="slide-subtitle">Master transaction directory, key contacts, and standard turnover verification checklist.</p>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">⚡ Master T-Code Quick Directory</h3>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>T-Code</th>
+                <th>System</th>
+                <th>Purpose & Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ZR190')">ZR190</span></td>
+                <td>PRD / DEV</td>
+                <td>Check PR release strategy & view approver error status</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('PPOME')">PPOME</span></td>
+                <td>DEV 510 / QAS</td>
+                <td>Maintain organizational structure & assign position holders</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('SU01')">SU01</span></td>
+                <td>DEV 510</td>
+                <td>Verify or create approver SAP user account</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('SCC1')">SCC1</span></td>
+                <td>DEV 100</td>
+                <td>Client copy TR from DEV 510 to DEV 100</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('SE10')">SE10</span></td>
+                <td>DEV 510</td>
+                <td>Release Customizing TR (Child task first, then Parent)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('STMS')">STMS</span></td>
+                <td>QAS</td>
+                <td>Import TR into QAS queue (Client 100)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME51N')">ME51N</span></td>
+                <td>QAS</td>
+                <td>Create test PR replicating PRD baseline</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ZT65')">ZT65</span> / <span class="tcode" onclick="copyTCode('ZR65n')">ZR65n</span></td>
+                <td>QAS / PRD</td>
+                <td>Monitor PR approval workflow & check work item forwarding</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('SLG1')">SLG1</span></td>
+                <td>PRD</td>
+                <td>Check ZUNNIXMAIL application logs for claim tags</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ZR65A')">ZR65A</span></td>
+                <td>PRD</td>
+                <td>Claim Tag Monitoring Report & Reprocess notification</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ZR54')">ZR54</span></td>
+                <td>PRD</td>
+                <td>Fallback claim tag lookup by Doc # and Employee ID</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ZT01')">ZT01</span> / <span class="tcode" onclick="copyTCode('ZH01')">ZH01</span></td>
+                <td>PRD</td>
+                <td>Employee Master Table maintenance for goods recipients</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right Side: Turnover Checklist & Contacts -->
+        <div class="content-card">
+          <h3 class="card-title">📋 Support Standard Operating Checklist</h3>
+
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.88rem; color: var(--text-secondary);">
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+              <strong>1. Approver Change Request Received:</strong> Check error in ZR190, confirm position name and required new user.
+            </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-warning);">
+              <strong>2. SU01 Check:</strong> Verify user exists in DEV 510 before opening PPOME.
+            </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+              <strong>3. Local Copy & SE10 Sequence:</strong> Copy to DEV 100 via SCC1, verify, then release sub-task first, parent TR second.
+            </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-purple);">
+              <strong>4. QAS Import & Testing:</strong> STMS queue import to Client 100, create test PR in ME51N, check ZT65/ZR65n.
+            </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-success);">
+              <strong>5. UAT & Basis Deployment:</strong> Obtain user confirmation, email Ms. Ira (Basis) with TR number and KP ticket #.
+            </div>
+          </div>
+
+          <div class="callout callout-note" style="margin-top: 1.25rem;">
+            <span class="callout-icon">📞</span>
+            <div class="callout-body">
+              <strong>Key Turnover Contact:</strong><br>
+              <strong>Basis Lead / Transport Contact:</strong> Ms. Ira Clarise S. Ramos<br>
+              <strong>FMS Helpdesk:</strong> FMS-Helpdesk@abs-cbn.com
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       BOTTOM NAVIGATION BAR (PREV / NEXT / COUNTER)
+       ========================================================================= -->
+  <footer class="bottom-navbar">
+    <div class="nav-status">
+      <div class="slide-counter-pill" id="slideCounter">Slide 1 of 12</div>
+      <div class="kb-hints">
+        <span>Navigate:</span>
+        <span class="kb-key">←</span>
+        <span class="kb-key">→</span>
+        <span class="kb-key">Space</span>
+        <span style="margin-left: 0.4rem;">Fullscreen:</span>
+        <span class="kb-key">F</span>
+        <span style="margin-left: 0.4rem;">TOC:</span>
+        <span class="kb-key">T</span>
+      </div>
+    </div>
+
+    <div class="nav-buttons-group">
+      <button class="btn-nav" id="btnPrev" onclick="prevSlide()" disabled>
+        ← Previous
+      </button>
+      <button class="btn-nav btn-nav-primary" id="btnNext" onclick="nextSlide()">
+        Next →
+      </button>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       LIGHTBOX MODAL FOR SCREENSHOT ZOOM
+       ========================================================================= -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightboxOnBackdrop(event)">
+    <div class="lightbox-header">
+      <div class="lightbox-title" id="lightboxTitle">Screenshot Preview</div>
+      <button class="lightbox-close" onclick="closeLightbox()" title="Close (Esc)">✕</button>
+    </div>
+    <div class="lightbox-body">
+      <img id="lightboxImg" src="" alt="Expanded View">
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TABLE OF CONTENTS DRAWER
+       ========================================================================= -->
+  <div class="toc-drawer" id="tocDrawer">
+    <div class="toc-header">
+      <h3>📑 Slide Navigator</h3>
+      <button class="btn-icon" onclick="toggleTOC()">✕</button>
+    </div>
+    <ul class="toc-list" id="tocList">
+      <!-- Populated via JS -->
+    </ul>
+  </div>
+
+  <!-- TOAST COPY NOTIFICATION -->
+  <div class="toast-copy" id="toastCopy">
+    <span>✨</span>
+    <span id="toastMsg">T-Code copied to clipboard!</span>
+  </div>
+
+  <!-- =========================================================================
+       INTERACTIVE JAVASCRIPT LOGIC
+       ========================================================================= -->
+  <script>
+    // State management
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const progressBar = document.getElementById('progressBar');
+    const slideCounter = document.getElementById('slideCounter');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const secTabs = document.querySelectorAll('.sec-tab');
+    const tocList = document.getElementById('tocList');
+
+    // Build Table of Contents list items
+    slides.forEach((slide, idx) => {
+      const title = slide.getAttribute('data-title') || `Slide ${idx + 1}`;
+      const part = slide.getAttribute('data-part') || 'Overview';
+      const li = document.createElement('li');
+      li.className = `toc-item ${idx === 0 ? 'active' : ''}`;
+      li.innerHTML = `<span><strong>${idx + 1}.</strong> ${title}</span><span style="font-size: 0.72rem; color: var(--text-muted);">${part}</span>`;
+      li.onclick = () => {
+        goToSlide(idx);
+        toggleTOC();
+      };
+      tocList.appendChild(li);
+    });
+
+    // Update Slide View
+    function updateSlide() {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+      });
+
+      // Update TOC active state
+      const tocItems = document.querySelectorAll('.toc-item');
+      tocItems.forEach((item, idx) => {
+        item.classList.toggle('active', idx === currentSlide);
+      });
+
+      // Update Progress Bar
+      const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // Update Counter
+      const currentPart = slides[currentSlide].getAttribute('data-part');
+      slideCounter.innerText = `Slide ${currentSlide + 1} of ${totalSlides} • ${currentPart}`;
+
+      // Update Button states
+      btnPrev.disabled = currentSlide === 0;
+      btnNext.innerText = currentSlide === totalSlides - 1 ? 'Finish 🏁' : 'Next →';
+
+      // Update Section Tabs
+      updateSectionTabs();
+
+      // Scroll to top of viewport
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateSectionTabs() {
+      // Map current slide to section tab index
+      let activeTabIdx = 0;
+      if (currentSlide === 0) activeTabIdx = 0;
+      else if (currentSlide >= 1 && currentSlide <= 6) activeTabIdx = 1; // Part 1 Approver
+      else if (currentSlide === 7) activeTabIdx = 2; // Part 1 Forwarding
+      else if (currentSlide >= 8 && currentSlide <= 9) activeTabIdx = 3; // Part 2 Claim Tag
+      else if (currentSlide === 10) activeTabIdx = 4; // Part 3 Recipient Auth
+      else if (currentSlide === 11) activeTabIdx = 5; // Matrix
+
+      secTabs.forEach((tab, idx) => {
+        tab.classList.toggle('active', idx === activeTabIdx);
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      } else {
+        // Go back to overview or prompt
+        showToast('Turnover deck complete! Returning to Overview.');
+        currentSlide = 0;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (document.getElementById('lightboxModal').classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      } else if (e.key.toLowerCase() === 't') {
+        toggleTOC();
+      } else if (e.key === 'Home') {
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        goToSlide(totalSlides - 1);
+      }
+    });
+
+    // Theme toggle (Light / Dark)
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sap_theme', newTheme);
+
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if (newTheme === 'dark') {
+        icon.innerText = '☀️';
+        label.innerText = 'Light';
+      } else {
+        icon.innerText = '🌙';
+        label.innerText = 'Dark';
+      }
+    }
+
+    // Initialize saved theme
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('sap_theme');
+      if (savedTheme) {
+        document.body.setAttribute('data-theme', savedTheme);
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+        if (savedTheme === 'dark') {
+          icon.innerText = '☀️';
+          label.innerText = 'Light';
+        } else {
+          icon.innerText = '🌙';
+          label.innerText = 'Dark';
+        }
+      }
+    })();
+
+    // TOC Toggle
+    function toggleTOC() {
+      const drawer = document.getElementById('tocDrawer');
+      drawer.classList.toggle('open');
+    }
+
+    // Fullscreen toggle
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Lightbox Modal
+    function openLightbox(src, title) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const titleEl = document.getElementById('lightboxTitle');
+      img.src = src;
+      titleEl.innerText = title || 'Screenshot Preview';
+      modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.remove('active');
+    }
+
+    function closeLightboxOnBackdrop(e) {
+      if (e.target.id === 'lightboxModal') {
+        closeLightbox();
+      }
+    }
+
+    // Copy T-Code
+    function copyTCode(tcode) {
+      navigator.clipboard.writeText(tcode).then(() => {
+        showToast(`T-Code "${tcode}" copied to clipboard!`);
+      }).catch(() => {
+        showToast(`Selected: ${tcode}`);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastCopy');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+      toast.style.display = 'flex';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
