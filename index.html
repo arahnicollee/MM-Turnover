@@ -985,7 +985,10 @@
       <button class="sec-tab" onclick="goToSlide(7)">Part 1: Forwarding</button>
       <button class="sec-tab" onclick="goToSlide(8)">Part 2: Claim Tag</button>
       <button class="sec-tab" onclick="goToSlide(10)">Part 3: Recipient Auth</button>
-      <button class="sec-tab" onclick="goToSlide(11)">Quick Matrix</button>
+      <button class="sec-tab" onclick="goToSlide(11)">Part 4: Masterdata</button>
+      <button class="sec-tab" onclick="goToSlide(12)">Part 5: Non-Stock PR</button>
+      <button class="sec-tab" onclick="goToSlide(13)">Part 6: Purchase Order</button>
+      <button class="sec-tab" onclick="goToSlide(14)">Quick Matrix</button>
     </nav>
 
     <!-- RIGHT CONTROLS -->
@@ -1019,7 +1022,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">TURNOVER DECK</span>
-            <span class="badge-step">SLIDE 1 OF 12</span>
+            <span class="badge-step">SLIDE 1 OF 15</span>
             <span class="badge-system">DEV 510 • DEV 100 • QAS • PRD</span>
           </div>
           <h1 class="slide-title">SAP MM SUPPORT TURNOVER</h1>
@@ -1043,7 +1046,7 @@
               </div>
               <strong style="color: var(--text-primary);">PR Approver Configuration & Transport Lifecycle</strong>
               <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
-                Resolving approver errors in ZR190, assigning position holders in PPOME (DEV 510), transporting to DEV 100 (SCC1), releasing TR (SE10), importing to QAS (STMS), testing (ME51N), Basis handover, and MR/PR Forwarding.
+                Resolving approver errors in ZR190, assigning position holders in PPOME (DEV 510), transporting to DEV 100 (SCC1), releasing TR (SE10), importing to QAS (STMS), testing (ME51N), Basis handover, and MR/PR Forwarding (ZS09).
               </p>
             </div>
 
@@ -1068,6 +1071,42 @@
               <strong style="color: var(--text-primary);">Other Support Issues: Recipient Authorization</strong>
               <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
                 Resolving "You are not authorized to use Recipient" PR error by maintaining the employee master table via ZT01 / ZH01.
+              </p>
+            </div>
+
+            <!-- Part 4 Card -->
+            <div style="padding: 0.85rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;" onclick="goToSlide(11)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span class="badge-part">PART 4</span>
+                <span style="font-size: 0.78rem; color: var(--brand-primary); font-weight: 700;">Slide 12 →</span>
+              </div>
+              <strong style="color: var(--text-primary);">SAP Masterdata Maintenance (SharePoint to SAP)</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                Manual creation (MM01), change (MM02), deletion (MM02/MM06), and display (MM03) under SSC Masterdata Custodian (Ana Rubia Baronia).
+              </p>
+            </div>
+
+            <!-- Part 5 Card -->
+            <div style="padding: 0.85rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;" onclick="goToSlide(12)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span class="badge-part">PART 5</span>
+                <span style="font-size: 0.78rem; color: var(--brand-primary); font-weight: 700;">Slide 13 →</span>
+              </div>
+              <strong style="color: var(--text-primary);">SAP Purchase Requisition: Non-stock Items</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                PR creation (ME51N) and change/deletion (ME52N) c/o SSC BOS, approval (SBWP/ME54N), PFAC-99900032 rule, and ZS10/CL24N plant matrix.
+              </p>
+            </div>
+
+            <!-- Part 6 Card -->
+            <div style="padding: 0.85rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;" onclick="goToSlide(13)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span class="badge-part">PART 6</span>
+                <span style="font-size: 0.78rem; color: var(--brand-primary); font-weight: 700;">Slide 14 →</span>
+              </div>
+              <strong style="color: var(--text-primary);">SAP Purchase Order: Creation, Approval & Printing</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                Buyer creation (ME21N), approval (SBWP/ME29N), rejection loop & amendment (ME22N), and message output printing (ME9F).
               </p>
             </div>
           </div>
@@ -1134,7 +1173,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 2 OF 12 • PROBLEM IDENTIFICATION</span>
+            <span class="badge-step">SLIDE 2 OF 15 • PROBLEM IDENTIFICATION</span>
           </div>
           <h1 class="slide-title">PR Approver Configuration: Background & Root Causes</h1>
           <p class="slide-subtitle">Understanding why PR approver errors occur and identifying them using T-Code ZR190.</p>
@@ -1218,7 +1257,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 3 OF 12 • CONFIGURATION STEP 1</span>
+            <span class="badge-step">SLIDE 3 OF 15 • CONFIGURATION STEP 1</span>
             <span class="badge-system">DEV 510 (Roles Client)</span>
           </div>
           <h1 class="slide-title">Approver Assignment in DEV 510</h1>
@@ -1359,7 +1398,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 4 OF 12 • CONFIGURATION STEP 2</span>
+            <span class="badge-step">SLIDE 4 OF 15 • CONFIGURATION STEP 2</span>
             <span class="badge-system">DEV 100 (Testing Client)</span>
           </div>
           <h1 class="slide-title">Transport Configuration from DEV 510 to DEV 100</h1>
@@ -1448,7 +1487,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 5 OF 12 • CONFIGURATION STEP 3</span>
+            <span class="badge-step">SLIDE 5 OF 15 • CONFIGURATION STEP 3</span>
             <span class="badge-system">DEV 510</span>
           </div>
           <h1 class="slide-title">Release the Transport Request (TR)</h1>
@@ -1537,7 +1576,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 6 OF 12 • CONFIGURATION STEP 4</span>
+            <span class="badge-step">SLIDE 6 OF 15 • CONFIGURATION STEP 4</span>
             <span class="badge-system">QAS</span>
           </div>
           <h1 class="slide-title">Transport to QAS via STMS</h1>
@@ -1669,7 +1708,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 7 OF 12 • TESTING & DEPLOYMENT</span>
+            <span class="badge-step">SLIDE 7 OF 15 • TESTING & DEPLOYMENT</span>
             <span class="badge-system">QAS → PRD</span>
           </div>
           <h1 class="slide-title">Testing, UAT & Production Handover</h1>
@@ -1749,12 +1788,13 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
-            <span class="badge-step">SLIDE 8 OF 12 • TEMPORARY DELEGATION</span>
+            <span class="badge-step">SLIDE 8 OF 15 • TEMPORARY DELEGATION</span>
           </div>
           <h1 class="slide-title">MR/PR Approver Forwarding Program</h1>
           <p class="slide-subtitle">Temporary reassignment of approval responsibilities when primary approver is away.</p>
         </div>
         <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ZS09')">ZS09</span>
           <span class="tcode" onclick="copyTCode('ZR65n')">ZR65n</span>
         </div>
       </div>
@@ -1763,15 +1803,15 @@
         <div class="content-card">
           <h3 class="card-title">🔄 Temporary Delegation Flow</h3>
           <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.55;">
-            A custom transaction is available for MR/PR Approver Forwarding. This allows temporary delegation without needing permanent organizational re-configuration.
+            A custom transaction <span class="tcode" onclick="copyTCode('ZS09')">ZS09</span> is available for MR/PR approver forwarding. This allows temporary delegation without needing permanent organizational re-configuration.
           </p>
 
           <ul class="step-list">
             <li class="step-item">
               <span class="step-num">1</span>
               <div class="step-text">
-                <strong>Input Approver Usernames:</strong>
-                <div>Enter the <strong>Original Approver Name</strong> (e.g. <code>CONNIETB</code>) and the <strong>Forward to Approver</strong> (e.g. <code>MARICELBR</code>).</div>
+                <strong>Execute ZS09 & Input Usernames:</strong>
+                <div>Execute transaction code <span class="tcode" onclick="copyTCode('ZS09')">ZS09</span>. Enter the <strong>Original Approver Name</strong> (e.g. <code>CONNIETB</code>) and the <strong>Forward to Approver</strong> (e.g. <code>MARICELBR</code>).</div>
               </div>
             </li>
             <li class="step-item">
@@ -1840,7 +1880,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 2</span>
-            <span class="badge-step">SLIDE 9 OF 12 • CLAIM TAG MONITORING</span>
+            <span class="badge-step">SLIDE 9 OF 15 • CLAIM TAG MONITORING</span>
           </div>
           <h1 class="slide-title">Claim Tag: Ticket Analysis & SLG1 Application Log</h1>
           <p class="slide-subtitle">Investigating "Unable to receive claim notification" tickets via SLG1 Unix logs.</p>
@@ -1902,6 +1942,12 @@
                 <strong>Time Restriction:</strong> Enter the date and time when the claim tag was dispatched, then Execute.
               </div>
             </li>
+            <li class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-text">
+                <strong>Verify Display Logs Output:</strong> Check the execution details and Unix <code>mailx</code> command. Confirm the recipient email address and ensure <em>"Successful sending via mailx"</em> appears.
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -1912,14 +1958,21 @@
             <div class="screenshot-caption"><span>Sample Ticket: KP-57140 Notification Issue</span><span class="caption-tag">Incident</span></div>
           </div>
 
-          <div class="screenshot-card" onclick="openLightbox('assets/images/image26.png', 'SLG1 - Object ZUNNIXMAIL and Subobject list')">
-            <div class="screenshot-wrap"><img src="assets/images/image26.png" alt="SLG1 Subobjects"></div>
-            <div class="screenshot-caption"><span>SLG1: Object ZUNNIXMAIL & Subobject selection</span><span class="caption-tag">Log Check</span></div>
+          <div class="thumb-grid">
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image26.png', 'SLG1 - Object ZUNNIXMAIL and Subobject list')">
+              <div class="screenshot-wrap"><img src="assets/images/image26.png" alt="SLG1 Subobjects"></div>
+              <div class="screenshot-caption"><span>SLG1: ZUNNIXMAIL Subobjects</span><span class="caption-tag">Setup</span></div>
+            </div>
+
+            <div class="screenshot-card" onclick="openLightbox('assets/images/image16.png', 'SLG1 - Time Restriction Configuration')">
+              <div class="screenshot-wrap"><img src="assets/images/image16.png" alt="Time Restriction"></div>
+              <div class="screenshot-caption"><span>Time Restriction Range</span><span class="caption-tag">Range</span></div>
+            </div>
           </div>
 
-          <div class="screenshot-card" onclick="openLightbox('assets/images/image16.png', 'SLG1 - Time Restriction Configuration')">
-            <div class="screenshot-wrap"><img src="assets/images/image16.png" alt="Time Restriction"></div>
-            <div class="screenshot-caption"><span>Set Time Restriction range before execution</span><span class="caption-tag">Execute</span></div>
+          <div class="screenshot-card" onclick="openLightbox('assets/images/slg1_display_logs.png', 'SLG1 - Display Logs: Unix email logs & mailx execution')">
+            <div class="screenshot-wrap"><img src="assets/images/slg1_display_logs.png" alt="SLG1 Display Logs"></div>
+            <div class="screenshot-caption"><span><strong>Display Logs:</strong> Verify OS CMD mailx & "Successful sending via mailx"</span><span class="caption-tag">Output Log</span></div>
           </div>
         </div>
       </div>
@@ -1933,7 +1986,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 2</span>
-            <span class="badge-step">SLIDE 10 OF 12 • REPROCESSING & FALLBACK</span>
+            <span class="badge-step">SLIDE 10 OF 15 • REPROCESSING & FALLBACK</span>
           </div>
           <h1 class="slide-title">Resending the Claim Tag: ZR65A & ZR54</h1>
           <p class="slide-subtitle">Reprocessing via Monitoring Report with fallback handling for unlisted documents.</p>
@@ -2024,7 +2077,7 @@
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">PART 3</span>
-            <span class="badge-step">SLIDE 11 OF 12 • MASTER DATA MAINTENANCE</span>
+            <span class="badge-step">SLIDE 11 OF 15 • MASTER DATA MAINTENANCE</span>
           </div>
           <h1 class="slide-title">Recipient Authorization & ZT01 Maintenance</h1>
           <p class="slide-subtitle">Resolving "You are not authorised to use Recipient" error via Employee Master Table.</p>
@@ -2113,14 +2166,365 @@
     </section>
 
     <!-- =========================================================================
-         SLIDE 12: QUICK MATRIX, T-CODE DIRECTORY & TURNOVER CHECKLIST
+         SLIDE 12: PART 4 - SAP MASTERDATA (SHAREPOINT TO SAP)
          ========================================================================= -->
-    <section class="slide" id="slide-11" data-part="Matrix" data-title="Cheat Sheet & Checklist">
+    <section class="slide" id="slide-11" data-part="Part 4" data-title="SAP Masterdata Maintenance">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 4</span>
+            <span class="badge-step">SLIDE 12 OF 15 • MASTER DATA OPERATIONS</span>
+            <span class="badge-system">PRD / ECC</span>
+          </div>
+          <h1 class="slide-title">SAP Masterdata: Item Maintenance</h1>
+          <p class="slide-subtitle">Manual material master creation, change, deletion, and display from SharePoint to SAP.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('MM01')">MM01</span>
+          <span class="tcode" onclick="copyTCode('MM02')">MM02</span>
+          <span class="tcode" onclick="copyTCode('MM03')">MM03</span>
+          <span class="tcode" onclick="copyTCode('MM06')">MM06</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">📦 Masterdata Overview & Custodian</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.55;">
+            Master data requests originate <strong>from SharePoint to SAP</strong>. When a material item request is approved in SharePoint, use the transactions below to create, change, or delete the item manually in SAP.
+          </p>
+
+          <div class="callout callout-note">
+            <span class="callout-icon">👤</span>
+            <div class="callout-body">
+              <strong>Official Masterdata Custodian:</strong> Below tcodes are all under <strong>SSC masterdata custodian (Ana Rubia Baronia)</strong>.
+            </div>
+          </div>
+
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 1rem 0 0.5rem 0;">Manual Item Maintenance Transactions:</h4>
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>Item Creation — <span class="tcode" onclick="copyTCode('MM01')">MM01</span>:</strong>
+                <div>Used to manually create a new material item in SAP with required views (Basic Data, Purchasing, Accounting, Plant/Storage).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>Item Change — <span class="tcode" onclick="copyTCode('MM02')">MM02</span>:</strong>
+                <div>Used to modify existing material parameters (e.g., material description, purchasing group, material group, or valuation data).</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>Item Deletion — <span class="tcode" onclick="copyTCode('MM06')">MM06</span>:</strong>
+                <div>Used to set the deletion flag for obsolete, duplicate, or phased-out material items at client, plant, or storage location level.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>Item Display — <span class="tcode" onclick="copyTCode('MM03')">MM03</span>:</strong>
+                <div>Read-only mode to view and verify existing material specifications without making unintended edits.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-warning" style="margin-top: 1rem;">
+            <span class="callout-icon">💡</span>
+            <div class="callout-body">
+              <strong>Best Practice:</strong> Always search and display the material in <span class="tcode" onclick="copyTCode('MM03')">MM03</span> first before creating in <span class="tcode" onclick="copyTCode('MM01')">MM01</span> to prevent duplicate material masters in SAP.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Visual T-Code Cards & Flow Diagram -->
+        <div class="gallery-container">
+          <div class="content-card" style="padding: 1.25rem; border-color: var(--brand-border); background: var(--bg-card);">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
+              Workflow: SharePoint ➔ SAP Manual Maintenance
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 1rem;">
+              <!-- MM01 Card -->
+              <div style="padding: 1rem; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-radius: 10px; text-align: center; box-shadow: var(--shadow-sm); cursor: pointer;" onclick="copyTCode('MM01')">
+                <div style="font-size: 0.82rem; font-weight: 600; opacity: 0.9;">Item Creation</div>
+                <div style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem;">MM01</div>
+              </div>
+
+              <!-- MM02 Card -->
+              <div style="padding: 1rem; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-radius: 10px; text-align: center; box-shadow: var(--shadow-sm); cursor: pointer;" onclick="copyTCode('MM02')">
+                <div style="font-size: 0.82rem; font-weight: 600; opacity: 0.9;">Item Change</div>
+                <div style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem;">MM02</div>
+              </div>
+
+              <!-- MM06 Deletion Card -->
+              <div style="padding: 1rem; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-radius: 10px; text-align: center; box-shadow: var(--shadow-sm); cursor: pointer;" onclick="copyTCode('MM06')">
+                <div style="font-size: 0.82rem; font-weight: 600; opacity: 0.9;">Item Deletion</div>
+                <div style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem;">MM06</div>
+              </div>
+
+              <!-- MM03 Display Card -->
+              <div style="padding: 1rem; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-radius: 10px; text-align: center; box-shadow: var(--shadow-sm); cursor: pointer;" onclick="copyTCode('MM03')">
+                <div style="font-size: 0.82rem; font-weight: 600; opacity: 0.9;">Item Display</div>
+                <div style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem;">MM03</div>
+              </div>
+            </div>
+
+            <!-- Custodian Pill with Updated Name -->
+            <div style="padding: 0.75rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">SSC Masterdata Custodian:</span>
+              <span style="font-size: 0.92rem; font-weight: 800; color: var(--brand-primary);">Ana Rubia Baronia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 13: PART 5 - SAP PURCHASE REQUISITION: NON-STOCK ITEMS
+         ========================================================================= -->
+    <section class="slide" id="slide-12" data-part="Part 5" data-title="Non-Stock PR Lifecycle">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 5</span>
+            <span class="badge-step">SLIDE 13 OF 15 • NON-STOCK PR LIFECYCLE</span>
+            <span class="badge-system">PRD / ECC</span>
+          </div>
+          <h1 class="slide-title">SAP Purchase Requisition: Non-stock Items</h1>
+          <p class="slide-subtitle">End-to-end non-stock PR creation, change/deletion, approval workflow, and release strategy matrix.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ME51N')">ME51N</span>
+          <span class="tcode" onclick="copyTCode('ME52N')">ME52N</span>
+          <span class="tcode" onclick="copyTCode('ME54N')">ME54N</span>
+          <span class="tcode" onclick="copyTCode('SBWP')">SBWP</span>
+          <span class="tcode" onclick="copyTCode('PFAC')">PFAC</span>
+          <span class="tcode" onclick="copyTCode('ZS10')">ZS10</span>
+          <span class="tcode" onclick="copyTCode('CL24N')">CL24N</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">📝 Process Overview & Channel (c/o SSC)</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.55;">
+            Non-stock PR requests are initiated <strong>from SharePoint to SAP (c/o SSC)</strong>. The creation and modification steps are handled care of <strong>SSC BOS</strong> (Business Operations Support).
+          </p>
+
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0.9rem 0 0.45rem 0;">Key PR Lifecycle T-Codes:</h4>
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>PR Creation — <span class="tcode" onclick="copyTCode('ME51N')">ME51N</span> (c/o SSC BOS):</strong>
+                <div>Used to create non-stock purchase requisitions in SAP based on approved SharePoint submissions.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>PR Change / Deletion — <span class="tcode" onclick="copyTCode('ME52N')">ME52N</span> (c/o SSC BOS):</strong>
+                <div>Used by SSC BOS to amend line items, update GL/cost centers, or set the deletion indicator on unneeded items.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>PR Approval — <span class="tcode" onclick="copyTCode('SBWP')">SBWP</span> / <span class="tcode" onclick="copyTCode('ME54N')">ME54N</span>:</strong>
+                <div>Approvers release the document via SAP Business Workplace inbox (<span class="tcode" onclick="copyTCode('SBWP')">SBWP</span>) or individual release transaction (<span class="tcode" onclick="copyTCode('ME54N')">ME54N</span>).</div>
+              </div>
+            </li>
+          </ul>
+
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 1.1rem 0 0.45rem 0;">Technical Workflow & Release Strategy Rules:</h4>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem;">
+            <div style="padding: 0.65rem 0.85rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+              <strong>Rule / Standard Task:</strong> <span class="tcode" onclick="copyTCode('PFAC')">PFAC</span> — <code>99900032</code> (Standard rule definition for PR workflow agent determination).
+            </div>
+            <div style="padding: 0.65rem 0.85rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-purple);">
+              <strong>PR Class & Matrix Values:</strong> <span class="tcode" onclick="copyTCode('ZS10')">ZS10</span> — Values per PR class including the values maintained in <span class="tcode" onclick="copyTCode('CL24N')">CL24N</span>.
+            </div>
+            <div style="padding: 0.65rem 0.85rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-warning);">
+              <strong>Approver Routing:</strong> PR Approver assignment strictly depends on the <strong>release strategy matrix per plant</strong>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Interactive Process Flow Architecture (No image) -->
+        <div class="gallery-container">
+          <div class="content-card" style="padding: 1.5rem; border-color: var(--brand-border); background: var(--bg-card);">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.25rem;">
+              Non-Stock PR Lifecycle Architecture (SharePoint ➔ SAP)
+            </div>
+
+            <!-- Visual Flow Stages -->
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <!-- Stage 1 & 2 (Creation & Change c/o SSC BOS) -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+                <!-- Creation Card -->
+                <div style="padding: 1.1rem; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-radius: 12px; text-align: center; box-shadow: var(--shadow-sm); cursor: pointer;" onclick="copyTCode('ME51N')">
+                  <div style="font-size: 0.95rem; font-weight: 700;">PR Creation</div>
+                  <div style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin: 0.25rem 0;">ME51N</div>
+                  <span style="display: inline-block; font-size: 0.75rem; background: rgba(255,255,255,0.22); padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;">c/o SSC BOS</span>
+                </div>
+
+                <!-- Change / Deletion Card -->
+                <div style="padding: 1.1rem; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-radius: 12px; text-align: center; box-shadow: var(--shadow-sm); cursor: pointer;" onclick="copyTCode('ME52N')">
+                  <div style="font-size: 0.95rem; font-weight: 700;">PR Change / Deletion</div>
+                  <div style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin: 0.25rem 0;">ME52N</div>
+                  <span style="display: inline-block; font-size: 0.75rem; background: rgba(255,255,255,0.22); padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600;">c/o SSC BOS</span>
+                </div>
+              </div>
+
+              <!-- Connecting Workflow Arrow Indicator -->
+              <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--brand-primary); font-weight: 700; font-size: 0.85rem; padding: 0.2rem 0;">
+                <span>▼</span>
+                <span style="background: var(--brand-tint); border: 1px solid var(--brand-border); padding: 0.25rem 0.85rem; border-radius: 20px;">Routes to Approver Inbox via Workflow Rule PFAC-99900032</span>
+                <span>▼</span>
+              </div>
+
+              <!-- Stage 3: Approval Card -->
+              <div style="padding: 1.25rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 12px; text-align: center; box-shadow: var(--shadow-md); cursor: pointer;" onclick="copyTCode('SBWP')">
+                <div style="font-size: 1.05rem; font-weight: 700;">PR Approval</div>
+                <div style="font-size: 1.4rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin: 0.35rem 0;">SBWP / ME54N</div>
+                <span style="display: inline-block; font-size: 0.78rem; background: rgba(255,255,255,0.25); padding: 0.2rem 0.65rem; border-radius: 6px; font-weight: 600;">Determined by Release Strategy Matrix per Plant</span>
+              </div>
+            </div>
+
+            <!-- Configuration Matrix Legend Box -->
+            <div style="margin-top: 1.25rem; padding: 0.85rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: 10px;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">Matrix Configuration Reference:</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                <span style="color: var(--text-secondary);">Classification Values:</span>
+                <span style="font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--brand-primary);">ZS10 (CL24N)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                <span style="color: var(--text-secondary);">Workflow Rule Definition:</span>
+                <span style="font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--accent-purple);">PFAC-99900032</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                <span style="color: var(--text-secondary);">Handling Team:</span>
+                <span style="font-weight: 700; color: var(--text-primary);">SSC BOS (Business Operations Support)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 14: PART 6 - SAP PURCHASE ORDER LIFECYCLE & APPROVAL FLOW
+         ========================================================================= -->
+    <section class="slide" id="slide-13" data-part="Part 6" data-title="SAP Purchase Order Flow">
+      <div class="slide-header">
+        <div class="header-info">
+          <div class="header-badges">
+            <span class="badge-part">PART 6</span>
+            <span class="badge-step">SLIDE 14 OF 15 • PO LIFECYCLE & PRINTING</span>
+            <span class="badge-system">PRD / ECC</span>
+          </div>
+          <h1 class="slide-title">SAP Purchase Order: Creation, Approval & Printing</h1>
+          <p class="slide-subtitle">Buyer ordering operations, multi-level approval matrix, rejection loop, and message printing.</p>
+        </div>
+        <div class="header-tcodes">
+          <span class="tcode" onclick="copyTCode('ME21N')">ME21N</span>
+          <span class="tcode" onclick="copyTCode('ME22N')">ME22N</span>
+          <span class="tcode" onclick="copyTCode('ME29N')">ME29N</span>
+          <span class="tcode" onclick="copyTCode('SBWP')">SBWP</span>
+          <span class="tcode" onclick="copyTCode('ME9F')">ME9F</span>
+        </div>
+      </div>
+
+      <div class="slide-grid">
+        <div class="content-card">
+          <h3 class="card-title">🛒 Purchase Order Workflow Stages</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.55;">
+            The Purchase Order (PO) lifecycle follows a structured operational flow handled between the designated <strong>Buyer per company</strong> and authorized approvers maintained in SAP workflow rules.
+          </p>
+
+          <ul class="step-list">
+            <li class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-text">
+                <strong>PO Creation — <span class="tcode" onclick="copyTCode('ME21N')">ME21N</span> (c/o Buyer per Company):</strong>
+                <div>The buyer creates the official Purchase Order with reference to an approved PR or contract, specifying vendor, delivery schedule, and pricing conditions.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-text">
+                <strong>PO Approval — <span class="tcode" onclick="copyTCode('SBWP')">SBWP</span> / <span class="tcode" onclick="copyTCode('ME29N')">ME29N</span> (c/o Approver):</strong>
+                <div>Approver receives the work item in SAP Business Workplace (<span class="tcode" onclick="copyTCode('SBWP')">SBWP</span>) or approves directly via Individual Release (<span class="tcode" onclick="copyTCode('ME29N')">ME29N</span>). Approver assignment is maintained in <strong>PFAC & release strategy matrix</strong>.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-text">
+                <strong>PO Rejection Loop (<span class="tcode" onclick="copyTCode('SBWP')">SBWP</span> ➔ <span class="tcode" onclick="copyTCode('ME22N')">ME22N</span>):</strong>
+                <div>If an approver rejects the PO in <span class="tcode" onclick="copyTCode('SBWP')">SBWP</span>, the workflow routes back to the <strong>buyer per company</strong> for <strong>PO Change (<span class="tcode" onclick="copyTCode('ME22N')">ME22N</span>)</strong>. Once amended and saved, the PO automatically re-enters the approval queue.</div>
+              </div>
+            </li>
+            <li class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-text">
+                <strong>PO Printing & Dispatch — <span class="tcode" onclick="copyTCode('ME9F')">ME9F</span> (c/o Buyer):</strong>
+                <div>Once fully released by all required approval levels, the buyer executes <span class="tcode" onclick="copyTCode('ME9F')">ME9F</span> (Message Output for Purchase Orders) to print or email the final purchase order to the vendor.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="callout callout-note" style="margin-top: 1rem;">
+            <span class="callout-icon">📌</span>
+            <div class="callout-body">
+              <strong>Key Rule:</strong> Any subsequent modification to net price, quantity, or delivery dates in <span class="tcode" onclick="copyTCode('ME22N')">ME22N</span> will reset the release strategy, requiring re-approval before printing in <span class="tcode" onclick="copyTCode('ME9F')">ME9F</span>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Flowchart Screenshot Card with Lightbox Zoom -->
+        <div class="gallery-container">
+          <div class="screenshot-card" onclick="openLightbox('assets/images/po_flowchart.png', 'SAP Purchase Order Lifecycle Flowchart')">
+            <div class="screenshot-wrap" style="background: #ffffff; padding: 0.75rem;">
+              <img src="assets/images/po_flowchart.png" alt="SAP Purchase Order Flowchart" style="max-height: 380px; object-fit: contain;">
+              <div class="zoom-overlay">🔍 Click to Zoom Flowchart</div>
+            </div>
+            <div class="screenshot-caption">
+              <span><strong>PO Lifecycle Flowchart:</strong> Creation ➔ Approval ➔ Rejection Loop ➔ Printing</span>
+              <span class="caption-tag">Process Map</span>
+            </div>
+          </div>
+
+          <div class="content-card" style="padding: 1rem; border-color: var(--border-subtle); background: var(--bg-card-subtle);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem;">Roles & Responsibilities Summary:</div>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-secondary);">Buyer per Company:</span>
+                <span style="font-weight: 700; color: var(--brand-primary);">ME21N (Creation) • ME22N (Change) • ME9F (Printing)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-secondary);">Approvers (PFAC / Matrix):</span>
+                <span style="font-weight: 700; color: var(--accent-success);">SBWP / ME29N (Approval) • SBWP (Rejection)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SLIDE 15: QUICK MATRIX, T-CODE DIRECTORY & TURNOVER CHECKLIST
+         ========================================================================= -->
+    <section class="slide" id="slide-14" data-part="Matrix" data-title="Cheat Sheet & Checklist">
       <div class="slide-header">
         <div class="header-info">
           <div class="header-badges">
             <span class="badge-part">REFERENCE MATRIX</span>
-            <span class="badge-step">SLIDE 12 OF 12 • CHEAT SHEET</span>
+            <span class="badge-step">SLIDE 15 OF 15 • CHEAT SHEET</span>
           </div>
           <h1 class="slide-title">SAP MM Support Cheat Sheet & Operational Checklist</h1>
           <p class="slide-subtitle">Master transaction directory, key contacts, and standard turnover verification checklist.</p>
@@ -2181,6 +2585,11 @@
                 <td>Monitor PR approval workflow & check work item forwarding</td>
               </tr>
               <tr>
+                <td><span class="tcode" onclick="copyTCode('ZS09')">ZS09</span></td>
+                <td>PRD / QAS</td>
+                <td>Custom MR/PR Approver Forwarding Program (temporary delegation)</td>
+              </tr>
+              <tr>
                 <td><span class="tcode" onclick="copyTCode('SLG1')">SLG1</span></td>
                 <td>PRD</td>
                 <td>Check ZUNNIXMAIL application logs for claim tags</td>
@@ -2199,6 +2608,76 @@
                 <td><span class="tcode" onclick="copyTCode('ZT01')">ZT01</span> / <span class="tcode" onclick="copyTCode('ZH01')">ZH01</span></td>
                 <td>PRD</td>
                 <td>Employee Master Table maintenance for goods recipients</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('MM01')">MM01</span></td>
+                <td>PRD</td>
+                <td>Create Material Master (Item Creation from SharePoint)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('MM02')">MM02</span></td>
+                <td>PRD</td>
+                <td>Change Material Master / Flag for Deletion</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('MM03')">MM03</span></td>
+                <td>PRD</td>
+                <td>Display Material Master (Read-only verification)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('MM06')">MM06</span></td>
+                <td>PRD</td>
+                <td>Flag Material for Deletion at Client / Plant level</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME52N')">ME52N</span></td>
+                <td>PRD</td>
+                <td>Change / Delete Purchase Requisition (c/o SSC BOS)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME54N')">ME54N</span></td>
+                <td>PRD</td>
+                <td>Individual Release of Purchase Requisition</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('SBWP')">SBWP</span></td>
+                <td>PRD</td>
+                <td>SAP Business Workplace (Workflow approval inbox)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('PFAC')">PFAC</span></td>
+                <td>DEV / PRD</td>
+                <td>Standard Rule Maintenance (e.g. Rule 99900032 PR routing)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ZS10')">ZS10</span></td>
+                <td>PRD</td>
+                <td>Values per PR class including CL24N classification</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('CL24N')">CL24N</span></td>
+                <td>PRD</td>
+                <td>Classification - Objects to Class (Release Strategy values)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME21N')">ME21N</span></td>
+                <td>PRD</td>
+                <td>Create Purchase Order (c/o Buyer per Company)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME22N')">ME22N</span></td>
+                <td>PRD</td>
+                <td>Change Purchase Order / Rejection Amendment (c/o Buyer)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME29N')">ME29N</span></td>
+                <td>PRD</td>
+                <td>Individual Release of Purchase Order (c/o Approver)</td>
+              </tr>
+              <tr>
+                <td><span class="tcode" onclick="copyTCode('ME9F')">ME9F</span></td>
+                <td>PRD</td>
+                <td>Message Output / PO Printing & Dispatch (c/o Buyer)</td>
               </tr>
             </tbody>
           </table>
@@ -2224,13 +2703,25 @@
             <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-success);">
               <strong>5. UAT & Basis Deployment:</strong> Obtain user confirmation, email Ms. Ira (Basis) with TR number and KP ticket #.
             </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+              <strong>6. Masterdata Requests:</strong> Process SharePoint requests using MM01/MM02/MM06 under Custodian Ana Rubia Baronia.
+            </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--accent-purple);">
+              <strong>7. Non-Stock PR Processing:</strong> Handled c/o SSC BOS (ME51N/ME52N) routing via PFAC-99900032 & ZS10 plant matrix to SBWP/ME54N.
+            </div>
+            <div style="padding: 0.6rem 0.8rem; background: var(--bg-card-subtle); border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+              <strong>8. Purchase Order Lifecycle:</strong> Created via ME21N, approved in SBWP/ME29N, rejection loop back to ME22N, and printed via ME9F.
+            </div>
           </div>
 
           <div class="callout callout-note" style="margin-top: 1.25rem;">
             <span class="callout-icon">📞</span>
             <div class="callout-body">
-              <strong>Key Turnover Contact:</strong><br>
+              <strong>Key Turnover Contacts:</strong><br>
               <strong>Basis Lead / Transport Contact:</strong> Ms. Ira Clarise S. Ramos<br>
+              <strong>SSC Masterdata Custodian:</strong> Ana Rubia Baronia<br>
+              <strong>SSC BOS (Business Operations Support):</strong> Non-Stock PR Creation & Modification (SharePoint to SAP)<br>
+              <strong>Buyer per Company:</strong> PO Creation (ME21N), Change (ME22N), and Message Output (ME9F)<br>
               <strong>FMS Helpdesk:</strong> FMS-Helpdesk@abs-cbn.com
             </div>
           </div>
@@ -2245,7 +2736,7 @@
        ========================================================================= -->
   <footer class="bottom-navbar">
     <div class="nav-status">
-      <div class="slide-counter-pill" id="slideCounter">Slide 1 of 12</div>
+      <div class="slide-counter-pill" id="slideCounter">Slide 1 of 15</div>
       <div class="kb-hints">
         <span>Navigate:</span>
         <span class="kb-key">←</span>
@@ -2368,7 +2859,10 @@
       else if (currentSlide === 7) activeTabIdx = 2; // Part 1 Forwarding
       else if (currentSlide >= 8 && currentSlide <= 9) activeTabIdx = 3; // Part 2 Claim Tag
       else if (currentSlide === 10) activeTabIdx = 4; // Part 3 Recipient Auth
-      else if (currentSlide === 11) activeTabIdx = 5; // Matrix
+      else if (currentSlide === 11) activeTabIdx = 5; // Part 4 Masterdata
+      else if (currentSlide === 12) activeTabIdx = 6; // Part 5 Non-Stock PR
+      else if (currentSlide === 13) activeTabIdx = 7; // Part 6 Purchase Order
+      else if (currentSlide === 14) activeTabIdx = 8; // Matrix
 
       secTabs.forEach((tab, idx) => {
         tab.classList.toggle('active', idx === activeTabIdx);
