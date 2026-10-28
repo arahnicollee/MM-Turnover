@@ -1020,7 +1020,7 @@
           <div class="header-badges">
             <span class="badge-part">TURNOVER DECK</span>
             <span class="badge-step">SLIDE 1 OF 12</span>
-            <span class="badge-system">DEV 510 • DEV 100 • QAS 100 • PRD 100</span>
+            <span class="badge-system">DEV 510 • DEV 100 • QAS • PRD</span>
           </div>
           <h1 class="slide-title">SAP MM SUPPORT TURNOVER</h1>
           <p class="slide-subtitle">Operational handover for Purchase Requisition Approver Configuration, Claim Tag Processing, and Master Data Maintenance.</p>
@@ -1088,7 +1088,7 @@
             <tbody>
               <tr>
                 <td><strong style="color: var(--brand-primary);">DEV 510</strong></td>
-                <td>Golden Client</td>
+                <td>Roles Client</td>
                 <td>Customizing & Org assignment (<span class="tcode" onclick="copyTCode('PPOME')">PPOME</span>), SU01, TR Release (<span class="tcode" onclick="copyTCode('SE10')">SE10</span>)</td>
               </tr>
               <tr>
@@ -1097,12 +1097,12 @@
                 <td>Client copy import (<span class="tcode" onclick="copyTCode('SCC1')">SCC1</span>) & initial verification</td>
               </tr>
               <tr>
-                <td><strong style="color: var(--brand-primary);">QAS 100</strong></td>
+                <td><strong style="color: var(--brand-primary);">QAS</strong></td>
                 <td>Quality Assurance</td>
                 <td>STMS import queue (<span class="tcode" onclick="copyTCode('STMS')">STMS</span>), PR testing (<span class="tcode" onclick="copyTCode('ME51N')">ME51N</span>), UAT</td>
               </tr>
               <tr>
-                <td><strong style="color: var(--brand-primary);">PRD 100</strong></td>
+                <td><strong style="color: var(--brand-primary);">PRD</strong></td>
                 <td>Production System</td>
                 <td>Transported by Basis (Ms. Ira), live ticket resolution</td>
               </tr>
@@ -1219,7 +1219,7 @@
           <div class="header-badges">
             <span class="badge-part">PART 1</span>
             <span class="badge-step">SLIDE 3 OF 12 • CONFIGURATION STEP 1</span>
-            <span class="badge-system">DEV 510 (Golden Client)</span>
+            <span class="badge-system">DEV 510 (Roles Client)</span>
           </div>
           <h1 class="slide-title">Approver Assignment in DEV 510</h1>
           <p class="slide-subtitle">Maintaining Org Structure via PPOME and ensuring User Account exists via SU01.</p>
@@ -1375,7 +1375,7 @@
         <div class="content-card">
           <h3 class="card-title">🚚 Client Copy Procedure via SCC1</h3>
           <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.55;">
-            After completing the configuration in Golden Client (DEV 510), proceed to DEV 100 to replicate the changes for unit testing without releasing the TR yet.
+            After completing the configuration in Roles Client (DEV 510), proceed to DEV 100 to replicate the changes for unit testing without releasing the TR yet.
           </p>
 
           <ul class="step-list">
@@ -1390,14 +1390,14 @@
               <span class="step-num">2</span>
               <div class="step-text">
                 <strong>Enter Source Client:</strong>
-                <div>In the <em>Source Client</em> field, input <code>510</code> (Golden Client, where config was created).</div>
+                <div>In the <em>Source Client</em> field, input <code>510</code> (Roles Client, where config was created).</div>
               </div>
             </li>
             <li class="step-item">
               <span class="step-num">3</span>
               <div class="step-text">
                 <strong>Enter Transport Request:</strong>
-                <div>Input your TR number (e.g. <code>DEVK9A05F5</code>).</div>
+                <div>Input your TR number (e.g. <code>DEVK9A05FP</code>).</div>
               </div>
             </li>
             <li class="step-item">
@@ -1432,7 +1432,7 @@
               <div class="zoom-overlay">🔍 Click to Zoom</div>
             </div>
             <div class="screenshot-caption">
-              <span><strong>SCC1 Settings:</strong> Source: 510, TR: DEVK9A05F5, [✓] Include tasks</span>
+              <span><strong>SCC1 Settings:</strong> Source: 510 (Roles Client), TR: DEVK9A05FP, [✓] Include tasks</span>
               <span class="caption-tag">T-Code: SCC1</span>
             </div>
           </div>
